@@ -11,167 +11,9 @@ import time
 import sys
 
 
-""" creating the world """
-
-def createWorld():
-
-    ### 
-
-    # creating rooms (aka cities) - and subrooms (aka puzzles) #
-
-    # home city = pdx
-    pdx = Room("Portland, OR: where you live. More description of clues in the city... ")
-    p1 = Room("Puzzle 1: ")
-    p2 = Room("Puzzle 2: ")
-    p3 = Room("Puzzle 3") 
-    
-    ### 
-    
-    # seoul, south korea 
-    sol = Room("You are in Seoul...")
-    s1 = Room("Puzzle 4")
-    s2 = Room("Puzzle 5")
-    s3 = Room("Puzzle 6")
-
-    ###
-
-    # erskineville, australia
-    ekv = Room("You are in Erskineville...")
-    e1 = Room("Puzzle 7")
-    e2 = Room("Puzzle 8")
-    ###
-
-    # warsaw, poland
-    war = Room("You are in Warsaw...")
-    w1 = Room("Puzzle 9")
-    w2 = Room("Puzzle 10")
-
-    ###
-
-    # haleiwa, hawaii
-    hal = Room("You are in Haleiwa...")
-
-    #connects all cities to each other
-    cities=[sol, ekv, war, hal]
-    for i in cities:
-        for k in cities:
-            if len(k.exits)==0:
-                Room.connectRooms(i, "x", k, "y")
-    
-    # connecting rooms #
-    
-    ## portland 
-    ### connections to other cities 
-    #Room.connectRooms(pdx, "x", sol, "y")
-    #Room.connectRooms(pdx, "x", ekv, "y")
-    #Room.connectRooms(pdx, "x", war, "y")
-    #Room.connectRooms(pdx, "x", hal, "y")
-
-    ### connections to puzzles within the city
-    #Room.connectRooms()
-
-
-    ## seoul 
-    # Room.connectRooms(p1, " ", p2, " ")
-    #Room.connectRooms(ekv, "east", hal, "west")
-    #Room.connectRooms(sol, "north", r3, "south")
-    #Room.connectRooms(r2, "north", r4, "south")
-
-    ###
-
-    # creating items #
-    i = Item("Rock", "This is just a rock.", 1)
-    i.putInRoom(pdx)
-    Player.location = pdx
-
-    # creating monsters #
-    Monster("Bob the monster", pdx)
-
-    ###
-
-    # creating NPCs #
-    #
-    #
-    #
-    #
-    #
-
-###
-
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-"""
-def printSituation(player):
-    clear()
-    # NOT WORKING BECAUSE LOCATION IN NONE
-    print(player.location.desc)
-    time.sleep(0.2)
-    print("\n")
-    print("Your intelligence: " + str(player.intelligence))
-    print()
-    print("Your location: " + str(player.location))
-    print()
-    print("Your level: " + str(player.level))
-
-    # monsters / puzzles !
-    if player.location.hasMonsters():
-        print("This room contains the following puzzle(s)")
-        for m in player.location.monsters:
-            time.sleep(0.5)
-            print(m.name)
-        print()
- 
-    # items
-    if player.location.hasItems():
-        print("This room contains the following items:")
-        for i in player.location.items:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-    else:
-        print("This room contains no items...")
-    
-    # characters
-    if player.location.hasCharacters():
-        print("This room contains the following characters:")
-        for i in player.location.characters:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-
-    # barriers
-    if player.location.hasBarriers():
-        print("This room contains the following obstacles:")
-        for i in player.location.barriers:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-    
-    #
-    print("You can go in the following directions:")
-    for e in player.location.exitNames():
-        print(e)
-    print()
-    # anything extra
-"""
-# help screen (make this cool and meta and stuff)
-def showHelp():
-    clear()
-    print("help -- brings up this help screen")
-    print("go <direction> -- moves you in the given direction")
-    print("inventory -- opens your inventory") # make inventory cool
-    print("pickup <item> -- picks up the item")
-    print("drop <item> -- drops the item")
-    print("other -- ")
-    print("")
-    print("")
-    input("Press enter to continue...")
-
-
-# GAME STARTS HERE
-
-createWorld()
 
 ### intro scene ###
 # add music
@@ -367,6 +209,156 @@ input("Press enter to continue...")
 
 player = Player(playername)
 
+""" creating the world """
+player = Player(playername)
+
+# GAME STARTS HERE
+
+
+def createWorld():
+
+    ### 
+
+    # creating rooms (aka cities) - and subrooms (aka puzzles) #
+
+    # home city = pdx
+    pdx = Room("Portland, OR: where you live. More description of clues in the city... ")
+    p1 = Room("Puzzle 1: ")
+    p2 = Room("Puzzle 2: ")
+    p3 = Room("Puzzle 3: ") 
+    player.location = pdx
+    Player.location = pdx
+    ### 
+    
+    # seoul, south korea 
+    sol = Room("You are in Seoul...")
+    s1 = Room("Puzzle 4")
+    s2 = Room("Puzzle 5")
+    s3 = Room("Puzzle 6")
+
+    ###
+
+    # erskineville, australia
+    ekv = Room("You are in Erskineville...")
+    e1 = Room("Puzzle 7")
+    e2 = Room("Puzzle 8")
+    ###
+
+    # warsaw, poland
+    war = Room("You are in Warsaw...")
+    w1 = Room("Puzzle 9")
+    w2 = Room("Puzzle 10")
+
+    ###
+
+    # haleiwa, hawaii
+    hal = Room("You are in Haleiwa...")
+
+    #connects all cities to each other
+    cities=[sol, ekv, war, hal]
+    for i in cities:
+        for k in cities:
+            if len(k.exits)==0:
+                Room.connectRooms(i, "x", k, "y")
+    
+    # connecting rooms to puzzles #
+    Room.connectRooms(pdx, "north", p1, "south")
+    #Room.connectRooms(p1, "")
+
+    ## seoul 
+    # Room.connectRooms(p1, " ", p2, " ")
+    #Room.connectRooms(ekv, "east", hal, "west")
+    #Room.connectRooms(sol, "north", r3, "south")
+    #Room.connectRooms(r2, "north", r4, "south")
+
+    ###
+
+    # creating items #
+    i = Item("Rock", "This is just a rock.", 1)
+    i.putInRoom(pdx)
+    # creating monsters #
+    Monster("Bob the monster", pdx)
+
+    ###
+
+    # creating NPCs #
+    #
+
+###
+
+
+def printSituation(player):
+    clear()
+    # NOT WORKING BECAUSE LOCATION IN NONE
+    print(player.location.desc)
+    time.sleep(0.2)
+    print("\n")
+    print("Your intelligence: " + str(player.intelligence))
+    print()
+    print("Your location: " + str(player.location))
+    print()
+    print("Your level: " + str(player.level))
+
+    # monsters / puzzles !
+    if player.location.hasMonsters():
+        print("This room contains the following puzzle(s)")
+        for m in player.location.monsters:
+            time.sleep(0.5)
+            print(m.name)
+        print()
+ 
+    # items
+    if player.location.hasItems():
+        print("This room contains the following items:")
+        for i in player.location.items:
+            time.sleep(0.5)
+            print(i.name)
+        print()
+    else:
+        print("This room contains no items...")
+    
+    # characters
+    if player.location.hasCharacters():
+        print("This room contains the following characters:")
+        for i in player.location.characters:
+            time.sleep(0.5)
+            print(i.name)
+        print()
+
+    # barriers
+    if player.location.hasBarriers():
+        print("This room contains the following obstacles:")
+        for i in player.location.barriers:
+            time.sleep(0.5)
+            print(i.name)
+        print()
+    
+    #
+    print("You can go in the following directions:")
+    for e in player.location.exitNames():
+        print(e)
+    print()
+    # anything extra
+
+
+# help screen (make this cool and meta and stuff)
+def showHelp():
+    clear()
+    print("\n")
+    print("help -- brings up this help screen")
+    print("go <direction> -- moves you in the given direction")
+    print("inventory -- opens your inventory") # make inventory cool
+    print("inspect <item or npc> -- gives you a short description of the item or NPC.")
+    print("pickup <item> -- picks up the item")
+    print("drop <item> -- drops the item")
+    print("status -- shows your current status")
+    print("other -- ")
+    print("")
+    print("")
+    input("Press enter to continue...")
+    print("\n")
+
+
 #printSituation(player)
 playing = True
 while playing and player.alive:
@@ -383,8 +375,18 @@ while playing and player.alive:
 
         commandWords = command.split()
         
+        # add other commands! 
+
+        # exit
+        if commandWords[0].lower() == "exit":
+            playing = False
+
+        # help
+        elif commandWords[0].lower() == "help":
+            showHelp()
+
         # go
-        if commandWords[0].lower() == "go":   # cannot handle multi-word directions
+        elif commandWords[0].lower() == "go":   # cannot handle multi-word directions
             player.goDirection(commandWords[1].lower()) 
             timePasses = True
 
@@ -399,34 +401,50 @@ while playing and player.alive:
                 print("No such item.")
                 commandSuccess = False
 
-
-        # add other commands! 
+        # drop
+        elif commandWords[0].lower() == "drop":
+            targetName = command[5:]
+            target = player.getItemByName(targetName)
+            if target in player.items:
+                player.dropoff(target)
+            else:
+                print("You do not have this item.")
+                commandSuccess = False
 
         # inventory
         elif commandWords[0].lower() == "inventory":
-            player.showInventory()        
+            player.showInventory()
 
-        # help
-        elif commandWords[0].lower() == "help":
-            showHelp()
+        elif commandWords[0].lower() == "inspect":
+            target = command[8:]
+            description = player.inspectThing(target)
+            if description:
+                description(target)
+            elif description == False:
+                print("What you seek is not here.")
+                # should we punish inspecting something that doesn't exist by reducing intelligence by one?
+                commandSuccess = False
+                input("Press enter to continue...")
 
-        # exit
-        elif commandWords[0].lower() == "exit":
-            playing = False
+        # status
+        elif commandWords[0].lower() == "status" or commandWords[0].lower() == "me":
+            player.showStatus() 
 
         # attack
-        elif commandWords[0].lower() == "attack":
-            targetName = command[7:]
-            target = player.location.getMonsterByName(targetName)
-            if target != False:
-                player.attackMonster(target)
-            else:
-                print("No such monster.")
-                commandSuccess = False
+        #elif commandWords[0].lower() == "attack":
+        #    targetName = command[7:]
+        #    target = player.location.getMonsterByName(targetName)
+        #    if target != False:
+        #        player.attackMonster(target)
+        #    else:
+        #        print("No such monster.")
+        #        commandSuccess = False
+
         # fly to
         #if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
         #    targetName = command
         # invalid command
+
         else:
             print("Not a valid command.")
             commandSuccess = False
