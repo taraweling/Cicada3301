@@ -19,9 +19,10 @@ class Player:
         self.alive = True
         self.itemWeights = 0 # make inventory have a limit
     
-    # list of actions: levelUp, goDirection, pickup, drop, getItemName, showInventory, showStatus, removeItem
+    # list of actions: levelUp, goDirection, pickup, drop, getItemName, showInventory, showStatus, removeItem, attackMonster
 
-    #def levelUp()
+    def levelUp(self):
+        self.level += 1
     
     def goDirection(self, direction):
 
@@ -119,11 +120,11 @@ class Player:
 
         # you can define some other functions about monster attacking etc, espcially one that allows you to make choices in fights
 
-            """
+        """
             def examineItem(self,item?)
             
             def useItem(self,)
-            """
+        """
 
 
 # create a class for powers or magic and such?

@@ -6,10 +6,6 @@ import os
 class Monster:
     def __init__(self, name, room): # points of monster and other input traints
         self.name = name
-
-
-        self.health = health
-
         
         self.room = room
         # self.whatever = whatever

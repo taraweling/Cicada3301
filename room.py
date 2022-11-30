@@ -1,5 +1,4 @@
 import random
-from 
 
 class Room:
     def __init__(self, description):

@@ -1,4 +1,5 @@
-from room import Room # can add other classes
+from room import Room 
+# can add other classes
 #from room import Barrier, quizBarrier
 from player import Player
 from item import Item # other item classes as well
@@ -8,7 +9,6 @@ import os
 import updater
 import time
 import sys
-
 
 
 """ creating the world """
@@ -43,6 +43,8 @@ def createWorld():
 
     # warsaw, poland
     war = Room("You are in Warsaw...")
+    w1 = Room("Puzzle 9")
+    w2 = Room("Puzzle 10")
 
     ###
 
@@ -54,38 +56,36 @@ def createWorld():
     for i in cities:
         for k in cities:
             if len(k.exits)==0:
-                Room.connectRoom(i, "x", k, "y")
+                Room.connectRooms(i, "x", k, "y")
     
     # connecting rooms #
     
     ## portland 
     ### connections to other cities 
-    Room.connectRooms(pdx, "x", sol, "y")
-    Room.connectRooms(pdx, "x", ekv, "y")
-    Room.connectRooms(pdx, "x", war, "y")
-    Room.connectRooms(pdx, "x", hal, "y")
+    #Room.connectRooms(pdx, "x", sol, "y")
+    #Room.connectRooms(pdx, "x", ekv, "y")
+    #Room.connectRooms(pdx, "x", war, "y")
+    #Room.connectRooms(pdx, "x", hal, "y")
 
     ### connections to puzzles within the city
-    Room.connectRooms()
+    #Room.connectRooms()
 
 
     ## seoul 
     # Room.connectRooms(p1, " ", p2, " ")
-    Room.connectRooms(r3, "east", r4, "west")
-    Room.connectRooms(pdx, "north", r3, "south")
-    Room.connectRooms(r2, "north", r4, "south")
+    #Room.connectRooms(ekv, "east", hal, "west")
+    #Room.connectRooms(sol, "north", r3, "south")
+    #Room.connectRooms(r2, "north", r4, "south")
 
     ###
 
     # creating items #
-    i = Item("Rock", "This is just a rock.")
-    i.putInRoom(r2)
-
-    
-    #Player.location = pdx
+    i = Item("Rock", "This is just a rock.", 1)
+    i.putInRoom(pdx)
+    Player.location = pdx
 
     # creating monsters #
-    Monster("Bob the monster", 20, r2)
+    Monster("Bob the monster", pdx)
 
     ###
 
@@ -101,9 +101,13 @@ def createWorld():
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def printSituation():
+"""
+def printSituation(player):
     clear()
+    # NOT WORKING BECAUSE LOCATION IN NONE
+    print(player.location.desc)
     time.sleep(0.2)
+    print("\n")
     print("Your intelligence: " + str(player.intelligence))
     print()
     print("Your location: " + str(player.location))
@@ -111,15 +115,13 @@ def printSituation():
     print("Your level: " + str(player.level))
 
     # monsters / puzzles !
-    #if player.location.hasMonsters():
-    #    print("This room contains the following puzzle(s)")
-    #    for m in player.location.monsters:
-    #        time.sleep(0.5)
-    #        print(m.name)
-    #    print()
-    #else:
-    #    pass
-    
+    if player.location.hasMonsters():
+        print("This room contains the following puzzle(s)")
+        for m in player.location.monsters:
+            time.sleep(0.5)
+            print(m.name)
+        print()
+ 
     # items
     if player.location.hasItems():
         print("This room contains the following items:")
@@ -127,6 +129,8 @@ def printSituation():
             time.sleep(0.5)
             print(i.name)
         print()
+    else:
+        print("This room contains no items...")
     
     # characters
     if player.location.hasCharacters():
@@ -150,41 +154,24 @@ def printSituation():
         print(e)
     print()
     # anything extra
-
+"""
 # help screen (make this cool and meta and stuff)
 def showHelp():
     clear()
     print("help -- brings up this help screen")
     print("go <direction> -- moves you in the given direction")
-    print("inventory -- opens your inventory") # make inventory cool, 
-    print()
-    print()
-    print()
-    print()
-    print()
-    # decipher thing
+    print("inventory -- opens your inventory") # make inventory cool
     print("pickup <item> -- picks up the item")
-    print()
+    print("drop <item> -- drops the item")
+    print("other -- ")
+    print("")
+    print("")
     input("Press enter to continue...")
-
-"""
-
-# scenes for different rooms
-def c
-
-# possible endings
-def endings():
-    clear()
-
-    if...
-
-"""
 
 
 # GAME STARTS HERE
 
 createWorld()
-
 
 ### intro scene ###
 # add music
@@ -280,7 +267,10 @@ def cicada():
     print("                                              Y&~                                                   ")
     time.sleep(0.15)
     print("                                               ^&7                                                  ")
-                    
+
+# cleared for speed
+
+"""
 clear()
 cicada()
 
@@ -304,6 +294,7 @@ print("\n")
 print("3301")
 print()
 input("Press enter to accept challenge...")
+"""
 
 intro = True
 while intro:
@@ -331,9 +322,8 @@ playername = input("What is your digital alias? ")
 time.sleep(1)
 while playername == "" or playername == " " or playername.lower() == "cicada":
     playername = input("Invalid. Try again.")
-time.sleep(1)
+time.sleep(0.75)
 print(playername + " has been successfully added to player database.") # change this
-
 
 # Function for inserting the player name the eye
 def formatName(playername, length):
@@ -349,12 +339,11 @@ def formatName(playername, length):
         return "X"+"X"*(r//2)+names+"X"*(r//2)
 
 
-
-
 #print()
 # do something cool with the players name
 # add music
-
+# commented out for speed
+""" 
 print("\n")
 time.sleep(1)
 print("Remember")
@@ -364,25 +353,24 @@ print("Cicada sees all.")
 time.sleep(1)
 print("Cicada knows all.")
 time.sleep(1)
-print("Break the rules,", playername, ",", "and I will find out.")
+print("Break the rules,", playername, "...")
+time.sleep(0.75)
+print("and I will find out.")
 time.sleep(1)
 
 eye()
 
-
 time.sleep(0.75)
+"""
 
 input("Press enter to continue...")
 
 player = Player(playername)
 
-
-printSituation()
-
-player.location = pdx
+#printSituation(player)
 playing = True
 while playing and player.alive:
-    printSituation()
+    #printSituation(player)
     commandSuccess = False
     timePasses = False
 
