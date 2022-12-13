@@ -14,6 +14,7 @@ class Player:
         self.intelligence = 50
         self.maxIntelligence = 100
         self.energy = 100
+        self.unlocked=[] #list of barriers that player has passed already
         self.level = 1
         # add traits
         self.alive = True
@@ -32,9 +33,15 @@ class Player:
             return
             
         if self.location.barrier != [] and self.location.getDestination(direction).barrier != []:
-            if self.location.barrier[0].type == "Puzzle":
-                self.location.barrier[0].ask(self)
-                pass
+            if self.location.barrier[0].type == "Barrier" and self.location.barrier[0].open:
+                self.location = self.location.barrier
+                if self.location not in self.unlocked:
+                    print ("Congratulations on completing this level. You are one step closer to discovering Cicada's secret")
+                    self.level+=1
+                    self.unlocked.append(self.location)
+                
+                print ("You have entered "+ str(self.location.desc+ "."))
+               
             else:
                 print("Forbidden")
                 input("Press enter to go back...")
