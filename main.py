@@ -2,7 +2,7 @@ from room import Room
 # can add other classes
 #from room import Barrier, quizBarrier
 from player import Player
-from item import Item # other item classes as well
+from item import * # other item classes as well
 from monster import Monster
 from NPC import NPC #, Cicada
 import os
@@ -11,8 +11,165 @@ import time
 import sys
 
 
+beatCicada = False
+
+# creating rooms (aka cities) - and subrooms (aka puzzles) #
+
+# home city = pdx
+pdx = Room("Home", "Portland, OR: where you live on Reed College campus.")
+p1 = Room("Puzzle 1", "blah")
+p2 = Room("Puzzle 2", "bleh")
+p3 = Room("Puzzle 3", "bloh") 
+    
+### 
+    
+# seoul, south korea 
+sol = Room("Seoul", "You are now in South Korea...")
+s1 = Room("Puzzle 4", "bleeh")
+s2 = Room("Puzzle 5", "blaeugh")
+s3 = Room("Puzzle 6", "bleooaun")
+
+
+###
+
+# warsaw, poland
+war = Room("Warsaw", "You are now in Poland...")
+w1 = Room("Puzzle 7", "blafhdj")
+w2 = Room("Puzzle 8", "blahshsh")
+
+###
+
+# haleiwa, hawaii
+hal = Room("Haleiwa", "You are now in Hawaii...")
+h1 = Room("Puzzle 9", "bleaosy")
+h2 = Room("Puzzle 10", "blaaksns")
+
+#connects all cities to each other
+cities = [pdx, sol, war, hal]
+for i in cities:
+    for k in cities:
+        if len(k.exits)==0:
+            flyout = "fly to " + str(k.name)
+            flyback = "fly back " + str(i.name)
+            Room.connectRooms(i, flyout, k, flyback)
+    
+
+# connecting rooms to puzzles #
+Room.connectRooms(pdx, "forward", p1, "backward")
+Room.connectRooms(p1, "forward", p2, "backward")
+Room.connectRooms(p2, "forward", p3, "backward")
+Room.connectRooms(p3, "forward", pdx, "backward")
+Room.connectRooms(sol, "forward", s1, "backward")
+Room.connectRooms(s1, "forward", s2, "backward")
+Room.connectRooms(s2, "forward", s3, "backward")
+
+    #Room.connectRooms(p1, "")
+
+    ## seoul 
+    # Room.connectRooms(p1, " ", p2, " ")
+    #Room.connectRooms(ekv, "east", hal, "west")
+    #Room.connectRooms(sol, "north", r3, "south")
+    #Room.connectRooms(r2, "north", r4, "south")
+
+    ###
+
+# creating items #
+i = Item("Your guide to Cicada 3301!", "This is just a copy of the game's instructions.", 0)
+i.putInRoom(pdx)
+i = Books("Booky book", "Just a book", 1, Player)
+
+
+# creating monsters #
+Monster("Bob the monster", pdx)
+
+###
+
+# creating NPCs #
+
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+def printSituation(player):
+    
+    clear()
+
+    print(player.showStatus)
+    print(player.location.desc)
+    time.sleep(0.2)
+    print("\n")
+    print("Your intelligence: " + str(player.intelligence))
+    print("Your health: " + str(player.health))
+    print("Your location: " + str(player.location.desc))
+    print("Your level: " + str(player.level))
+    print("\n")
+    # monsters
+    if player.location.hasMonsters():
+        print("This room contains the following monster(s):")
+        for m in player.location.monsters:
+            time.sleep(0.5)
+            print(m.name)
+    
+    # items
+    if player.location.hasItems():
+        print("This room contains the following items:")
+        for i in player.location.items:
+            time.sleep(0.5)
+            print(i.name)
+    else:
+        print("This room contains no items...")
+        
+    # characters
+    if player.location.hasCharacters():
+        print("This room contains the following characters:")
+        for i in player.location.characters:
+            time.sleep(0.5)
+            print(i.name)
+
+    # barriers
+    if player.location.hasBarriers():
+        print("This room contains the following obstacles:")
+        for i in player.location.barriers:
+            time.sleep(0.5)
+            print(i.name) 
+
+    #this is currently faulty - change it to be more clean
+    print("You can go in the following directions:")
+    for exit in player.location.exitNames():
+        print(exit)
+    # anything extra
+
+
+# help screen (make this cool and meta and stuff)
+def showHelp():
+    clear()
+    print("\n")
+    print("Cicada 3301: Remember. There are 10 puzzles. You cannot move on unless you answer correctly.")
+    print("help -- brings up this help screen")
+    print("go <forward/backward> -- moves you in the given direction onto the next puzzle")
+    print("inventory -- opens your inventory") # make inventory cool
+    print("inspect <item or npc> -- gives you a short description of the item or NPC")
+    #print("eat <item> -- ")
+    print("pickup <item> -- picks up the item")
+    print("drop <item> -- drops the item")
+    print("use <item> -- uses an item. Also works to read an item.") #separate the read function from the use one
+    print("status -- shows your current status")
+    print("attack <monster> -- attacks chosen monster")
+    # have these been coded yet?
+    print("talk to <NPC> -- talks to an NPC")
+    print("\n")
+    print("Getting low on Health?")
+    print("There are various food-like items in the game - type the eat command and see what happens!")
+    print("Low on intelligence?")
+    print("Read a book. Come on, what did you expect?")
+    input("Press enter to continue...")
+    print("\n")
+
+
+
+# # # # # # # # # # # #
+
+
+
 
 
 ### intro scene ###
@@ -20,6 +177,7 @@ def clear():
 # print cicada intro
 
 # Some cool ASCII printing functions
+"""
 def eye():
     print(".           ..         .           .       .           .           .")
     time.sleep(0.2)
@@ -109,13 +267,24 @@ def cicada():
     print("                                              Y&~                                                   ")
     time.sleep(0.15)
     print("                                               ^&7                                                  ")
-
+"""
 # cleared for speed
+clear()
+#cicada()
+# # # # # # # # # # # # #
+def endings():
+    clear()
+
+    pass
+
+
+
+# # # # # # # # # # # # # remember to remove commented out paragraphs
 
 """
-clear()
-cicada()
+# cicada 3301 screen
 
+clear()
 print("Hello.")
 time.sleep(1)
 print()
@@ -138,7 +307,7 @@ print()
 input("Press enter to accept challenge...")
 """
 
-intro = True
+intro = False
 while intro:
     clear()
     time.sleep(0.75)
@@ -147,25 +316,44 @@ while intro:
     time.sleep(0.75)
     print("\n")
     if ans.lower() == "no" or ans.lower() == "n":
-        print("blah blah blah who are you etc")
+        print("You are a regular, boring person browsing reddit in 2012 when you find out about this strange internet phenomenon called Cicada 3301.")
         time.sleep(0.75)
-        print("more info etc")
+        print("Since you already spend too much time online, you decide to investigate.")
         time.sleep(0.75)
-        print("more info")
+        print("Nobody knows who is behind the cryptic puzzles being released on the internet...")
+        time.sleep(0.75)
+        print("But maybe you will be the one to find out...")
+        time.sleep(0.25)
+        print("How?")
+        time.sleep(1)
+        print("You will travel the world, answering puzzles and fighting your enemies with words and books and stuff...")
+        time.sleep(0.75)
+        print("To find out who Cicada truly is, you can increase your intelligence by reading books, which helps you answer all 10 puzzles.")
+        time.sleep(0.75)
+        print("You must keep your health up by eating food.")
+        time.sleep(0.1)
+        print("And make sure your intelligence stays high, and your criminal activity doesn't...")
+        time.sleep(0.75)
+        print("Or you die :(")
+        time.sleep(1)
+        print("Cicada will be watching. Type help to see the list of commands.")
+        time.sleep(0.25)
         intro = False
     elif ans.lower() == "yes" or ans.lower() == "y":
-        print("We'll see about that...")
+        print("Are you sure? We will see about that...")
+        time.sleep(0.75)
+        print("Remember, you can type help to see a list of the commands.")
         intro = False
     else:
         print("You either understand or you don't.")
 print("\n")
 time.sleep(1)
 playername = input("What is your digital alias? ")
-time.sleep(1)
-while playername == "" or playername == " " or playername.lower() == "cicada":
-    playername = input("Invalid. Try again.")
+
+while playername == "" or playername == " " or playername.lower() == "Cicada":
+    playername = input("Invalid. Try again. ")
 time.sleep(0.75)
-print(playername + " has been successfully added to player database.") # change this
+print(playername + " has been successfully added to player database.") 
 
 # Function for inserting the player name the eye
 def formatName(playername, length):
@@ -185,7 +373,7 @@ def formatName(playername, length):
 # do something cool with the players name
 # add music
 # commented out for speed
-""" 
+"""
 print("\n")
 time.sleep(1)
 print("Remember")
@@ -195,7 +383,13 @@ print("Cicada sees all.")
 time.sleep(1)
 print("Cicada knows all.")
 time.sleep(1)
-print("Break the rules,", playername, "...")
+print("You will hear from me throughout the game")
+print("\n")
+time.sleep(0.5)
+print("Cicada 3301: Just like this")
+print("\n")
+time.sleep(0.5)
+print("Cicada 3301: Break the rules,", playername,"...")
 time.sleep(0.75)
 print("and I will find out.")
 time.sleep(1)
@@ -207,174 +401,34 @@ time.sleep(0.75)
 
 input("Press enter to continue...")
 
-player = Player(playername)
+
 
 """ creating the world """
 player = Player(playername)
 
 # GAME STARTS HERE
 
+# add conversation
 
-def createWorld():
+player.location = pdx
 
-    ### 
-
-    # creating rooms (aka cities) - and subrooms (aka puzzles) #
-
-    # home city = pdx
-    pdx = Room("Portland, OR: where you live. More description of clues in the city... ")
-    p1 = Room("Puzzle 1: ")
-    p2 = Room("Puzzle 2: ")
-    p3 = Room("Puzzle 3: ") 
-    player.location = pdx
-    Player.location = pdx
-    ### 
-    
-    # seoul, south korea 
-    sol = Room("You are in Seoul...")
-    s1 = Room("Puzzle 4")
-    s2 = Room("Puzzle 5")
-    s3 = Room("Puzzle 6")
-
-    ###
-
-    # erskineville, australia
-    ekv = Room("You are in Erskineville...")
-    e1 = Room("Puzzle 7")
-    e2 = Room("Puzzle 8")
-    ###
-
-    # warsaw, poland
-    war = Room("You are in Warsaw...")
-    w1 = Room("Puzzle 9")
-    w2 = Room("Puzzle 10")
-
-    ###
-
-    # haleiwa, hawaii
-    hal = Room("You are in Haleiwa...")
-
-    #connects all cities to each other
-    cities=[sol, ekv, war, hal]
-    for i in cities:
-        for k in cities:
-            if len(k.exits)==0:
-                Room.connectRooms(i, "x", k, "y")
-    
-    # connecting rooms to puzzles #
-    Room.connectRooms(pdx, "north", p1, "south")
-    #Room.connectRooms(p1, "")
-
-    ## seoul 
-    # Room.connectRooms(p1, " ", p2, " ")
-    #Room.connectRooms(ekv, "east", hal, "west")
-    #Room.connectRooms(sol, "north", r3, "south")
-    #Room.connectRooms(r2, "north", r4, "south")
-
-    ###
-
-    # creating items #
-    i = Item("Rock", "This is just a rock.", 1)
-    i.putInRoom(pdx)
-    # creating monsters #
-    Monster("Bob the monster", pdx)
-
-    ###
-
-    # creating NPCs #
-    #
-
-###
-
-
-def printSituation(player):
-    clear()
-    # NOT WORKING BECAUSE LOCATION IN NONE
-    print(player.location.desc)
-    time.sleep(0.2)
-    print("\n")
-    print("Your intelligence: " + str(player.intelligence))
-    print()
-    print("Your location: " + str(player.location))
-    print()
-    print("Your level: " + str(player.level))
-
-    # monsters / puzzles !
-    if player.location.hasMonsters():
-        print("This room contains the following puzzle(s)")
-        for m in player.location.monsters:
-            time.sleep(0.5)
-            print(m.name)
-        print()
- 
-    # items
-    if player.location.hasItems():
-        print("This room contains the following items:")
-        for i in player.location.items:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-    else:
-        print("This room contains no items...")
-    
-    # characters
-    if player.location.hasCharacters():
-        print("This room contains the following characters:")
-        for i in player.location.characters:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-
-    # barriers
-    if player.location.hasBarriers():
-        print("This room contains the following obstacles:")
-        for i in player.location.barriers:
-            time.sleep(0.5)
-            print(i.name)
-        print()
-    
-    #
-    print("You can go in the following directions:")
-    for e in player.location.exitNames():
-        print(e)
-    print()
-    # anything extra
-
-
-# help screen (make this cool and meta and stuff)
-def showHelp():
-    clear()
-    print("\n")
-    print("help -- brings up this help screen")
-    print("go <direction> -- moves you in the given direction")
-    print("inventory -- opens your inventory") # make inventory cool
-    print("inspect <item or npc> -- gives you a short description of the item or NPC.")
-    print("pickup <item> -- picks up the item")
-    print("drop <item> -- drops the item")
-    print("status -- shows your current status")
-    print("other -- ")
-    print("")
-    print("")
-    input("Press enter to continue...")
-    print("\n")
-
-
-#printSituation(player)
 playing = True
+
 while playing and player.alive:
-    #printSituation(player)
+    if player.location == h2:
+        # special final boss thing
+        pass
+    printSituation(player)
     commandSuccess = False
     timePasses = False
 
     while not commandSuccess:
         commandSuccess = True
         command = input("What now? ")
-        
         while command == " " or command == "":
             command = input("What now? ")
-
         commandWords = command.split()
-        
+            
         # add other commands! 
 
         # exit
@@ -386,7 +440,8 @@ while playing and player.alive:
             showHelp()
 
         # go
-        elif commandWords[0].lower() == "go":   # cannot handle multi-word directions
+        elif commandWords[0].lower() == "go": 
+            # cannot handle multi-word directions
             player.goDirection(commandWords[1].lower()) 
             timePasses = True
 
@@ -401,10 +456,22 @@ while playing and player.alive:
                 print("No such item.")
                 commandSuccess = False
 
+        # use - make sure to separate from read and eat if we have time
+        elif commandWords[0].lower() == "use":
+            targetName = command[4:]
+            target = player.getItemByName(targetName)
+            if target in player.items:
+                player.useitem(target) # has this been coded
+                timePasses = True
+            else:
+                print("You don't have that item in your inventory!")
+                commandSuccess = False
+
         # drop
         elif commandWords[0].lower() == "drop":
             targetName = command[5:]
             target = player.getItemByName(targetName)
+            
             if target in player.items:
                 player.dropoff(target)
             else:
@@ -414,21 +481,26 @@ while playing and player.alive:
         # inventory
         elif commandWords[0].lower() == "inventory":
             player.showInventory()
-
+                
+        # inspect 
         elif commandWords[0].lower() == "inspect":
-            target = command[8:]
-            description = player.inspectThing(target)
+            targetName = command[8:]
+            description = player.inspectThing(targetName)
             if description:
-                description(target)
+                description(targetName)
             elif description == False:
-                print("What you seek is not here.")
-                # should we punish inspecting something that doesn't exist by reducing intelligence by one?
+                print("The item you seek does not exist.")
                 commandSuccess = False
                 input("Press enter to continue...")
 
         # status
         elif commandWords[0].lower() == "status" or commandWords[0].lower() == "me":
             player.showStatus() 
+
+        # wait 
+        elif commandWords[0].lower() == "wait":
+            timePasses= True
+
 
         # attack
         #elif commandWords[0].lower() == "attack":
@@ -448,26 +520,6 @@ while playing and player.alive:
         else:
             print("Not a valid command.")
             commandSuccess = False
-
-    if player.level > 5:
-        clear()
-        print("Congratulations. You have successfully unmasked Cicada. The world of cryptography and computation has been forever changed.")
-        time.sleep(5)
-        print ("Dei spectant.")
-        time.sleep(2)
-        clear()
-        print ("Dei spectant.")
-        time.sleep(3)
-        clear()
-        time.sleep(1)
-        quit()
-
-
-
+            
     if timePasses == True:
         updater.updateAll()
-
-    
-
-
-
