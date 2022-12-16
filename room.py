@@ -1,8 +1,7 @@
 import random
 
 class Room:
-    def __init__(self, name, description):
-        self.name = name
+    def __init__(self, description):
         self.desc = description
         self.monsters = []
         self.exits = []
@@ -16,7 +15,7 @@ class Room:
     def addExit(self, exitName, destination):
         self.exits.append([exitName, destination])
     def removeExit(self, exitName, destination):
-        self.exits.remove([exitName. destination])
+        self.exits.remove([exitName, destination])
     def exitNames(self):
         return [x[0] for x in self.exits]
 
@@ -32,7 +31,6 @@ class Room:
         #creates "dir1" exit from room1 to room2 and vice versa
         room1.addExit(dir1, room2)
         room2.addExit(dir2, room1)
-
     # removes connections to other rooms
     def removeConnections(room1, dir1, room2, dir2):
         room1.removeExit(dir1, room2)
@@ -40,7 +38,7 @@ class Room:
         pass
     # one-way connects rooms - cannot leave
     def semiConnectRooms(room1, dir2, room2):
-        room1.addExit(dir1, room2)
+        room1.addExit(dir2, room2)
     
 
     # Items
@@ -97,7 +95,7 @@ class Room:
 
     # Barriers
     def hasBarriers(self):
-        return self.barrier != []
+        return self.barriers != []
     def getBarrierByName(self, name):
         for i in self.barriers:
             if i.name.lower() == name.lower():
@@ -112,7 +110,23 @@ class Room:
     
 
 
-""" Class for Barrier preventing entry into other rooms before puzzle has been correctly answered 
+#Class for Barrier preventing entry into other rooms before puzzle has been correctly answered 
+
 class Barrier(Room):
-    def __init__(self, name, desc): #name is inputted
-    """
+    def __init__(self, name, desc, origin, dir): #name is inputted, as well as the room the player is coming from (so that the player can go back even if barrier is closed)
+        Room.__init__(self,desc)
+        self.name=name
+        self.open=False
+        self.closed=self.exits
+        self.origin=origin
+        self.dir=dir
+
+    def closeBarrier(self):
+        self.open=False
+        self.exits=[]
+        self.addExit(self.dir, self.origin)       
+
+    def openBarrier(self):
+        self.removeExit(self.origin, self.dir)
+        self.open=True
+        self.exits=self.closed
