@@ -99,7 +99,7 @@ def recover():
     if os.path.exists(filename):
         with open(filename, "r") as f:
             location = f.readline().strip()
-            health = int(f.readline().strip())
+            health = int(float(f.readline().strip()))
             intelligence = int(float(f.readline().strip()))
             level = int(f.readline().strip())
 
@@ -553,6 +553,9 @@ while playing and player.alive:
                 filename=input("What would you like to call your file? ")
                 saveGame(player,filename)
                 print ("Done!")
+                time.sleep(3)
+                print ("Back to the same...")
+                time.sleep(1.3)
             else:
                 print ("Ok!")
             
