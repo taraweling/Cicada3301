@@ -22,3 +22,20 @@ Modeled after this international
 informatics events of the 10's, our game
 immerses you in a world of cyphers, 
 monsters, and mysteries as well. 
+
+Our game is not everything we envisioned, 
+but we have written the following parts:
+
+-me command
+-inspect command
+-limited inventory
+-drop command
+-healing item
+-regeneration
+-victory condition
+-events
+-complex rooms
+-leveling up
+-world modification (maybe?)
+-game saving
+-ASCII art

@@ -57,10 +57,14 @@ class Player:
 
 
     def pickup(self, item):
-        self.itemWeights += item.weight
-        self.items.append(item)
-        item.loc = self
-        self.location.removeItem(item)
+        
+        if self.itemweights +item.weight < 20
+            self.items.append(item)
+            self.itemWeights += item.weight
+            item.loc = self
+            self.location.removeItem(item)
+        else:
+            print("Too heavy to pick up!")
 
     def drop(self, item):
         self.itemsweight -= item.weight

@@ -16,7 +16,7 @@ beatCicada = False
 # creating rooms (aka cities) - and subrooms (aka puzzles) #
 
 # home city = pdx
-pdx = Room("Home", "Portland, OR, where you live on Reed College campus.")
+pdx = Room("pdx", "Portland, OR, where you live on Reed College campus.")
 p1 = Room("Puzzle 1", "blah")
 p2 = Room("Puzzle 2", "bleh")
 p3 = Room("Puzzle 3", "bloh") 
@@ -56,9 +56,9 @@ for i in cities:
 
 # connecting rooms to puzzles #
 library=Room(pdx, "Reed College Library")
-eliot=Room(pdx, "Eliot Hall")
-Room.connectRooms(pdx, "forward", library, "backward")
-Room.connectRooms(library, "forward", eliot, "backward")
+Eliot=Room(pdx, "Eliot Hall")
+Room.connectRooms(pdx, "to the city", library, "to the library")
+Room.connectRooms(library, "to the library", Eliot, "to Eliot")
 Room.connectRooms(p2, "forward", p3, "backward")
 Room.connectRooms(p3, "forward", pdx, "backward")
 Room.connectRooms(sol, "forward", s1, "backward")
@@ -85,7 +85,29 @@ i = Books("Booky book", "Just a book", 1, Player)
 
 ###
 
-# creating NPCs #
+
+def saveGame(player, filename):
+    with open(filename, "w") as f:
+        f.write(player.location.location + "\n")
+        f.write(str(player.health) + "\n")
+        f.write(str(player.intelligence) + "\n")
+        f.write(str(player.level) + "\n")
+
+
+def recover():
+    filename = input("Enter the filename of your saved game: ")
+    if os.path.exists(filename):
+        with open(filename, "r") as f:
+            location = f.readline().strip()
+            health = int(f.readline().strip())
+            intelligence = int(f.readline().strip())
+            level = int(f.readline().strip())
+
+        player = Player(location, health, intelligence, level)
+    else:
+    # Create a new player object as before
+        player = Player(pdx, 10, 5, 1)
+        print ("game not foind")
 
 def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -139,7 +161,7 @@ def printSituation(player):
         print("\n")
 
     #this is currently faulty - change it to be more clean
-    print("You can go in the following directions: \n")
+    print("You can attempt to go in the following directions: \n")
     for exit in player.location.exitNames():
         print(exit)
     print("\n")
@@ -152,15 +174,17 @@ def showHelp():
     print("\n")
     print("Cicada 3301: Remember. There are 10 puzzles. You cannot move on unless you answer correctly.")
     print("help -- brings up this help screen")
+    print("save -- saves game for later")
+    print("recover -- recovers previous game")      
     print("go <forward/backward> -- moves you in the given direction onto the next puzzle")
     print("inventory -- opens your inventory") # make inventory cool
     print("inspect <item or npc> -- gives you a short description of the item or NPC")
-    #print("eat <item> -- ")
+    print("eat <item> -- ")
     print("pickup <item> -- picks up the item")
     print("drop <item> -- drops the item")
     print("use <item> -- uses an item. Also works to read an item.") #separate the read function from the use one
     print("status -- shows your current status")
-    print("attack <monster> -- attacks chosen monster")
+    #print("attack <monster> -- attacks chosen monster")
     # have these been coded yet?
     print("talk to <NPC> -- talks to an NPC")
     print("\n")
@@ -367,6 +391,7 @@ for x in range (0,5):
     b = "Processing" + "." * x
     print (b, end="\r")
     time.sleep(0.25)
+
 print(playername + " has been successfully added to player database.") 
 time.sleep(1)
 input("You may now enter")
@@ -515,10 +540,24 @@ while playing and player.alive:
         # status
         elif commandWords[0].lower() == "status" or commandWords[0].lower() == "me":
             player.showStatus() 
+            
 
         # wait 
         elif commandWords[0].lower() == "wait":
             timePasses= True
+
+        elif commandWords[0].lower() == "recover":
+            recover()
+        elif commandWords[0].lower()=="save":
+            saving=input("Would you like to save your progress to come back later? (y/n) ").lower()
+            if saving == "y":
+                filename=input("What would you like to call your file? ")
+                saveGame(player,filename)
+                print ("Done!")
+            else:
+                print ("Ok!")
+            
+            
 
 
         # attack
@@ -532,7 +571,7 @@ while playing and player.alive:
         #        commandSuccess = False
 
         # fly to
-        if player.level > 5:
+        elif player.level > 5:
             clear()
             print("Congratulations. You have successfully unmasked Cicada. The world of cryptography and computation has been forever changed.")
             time.sleep(5)
@@ -545,7 +584,7 @@ while playing and player.alive:
             time.sleep(1)
             quit()
         
-        if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
+        elif commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
             if commandWords[0].lower() == "fly to":
                 x = 8
             else:
@@ -564,3 +603,4 @@ while playing and player.alive:
             
     if timePasses == True:
         updater.updateAll()
+        player.health+=.2
