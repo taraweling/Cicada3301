@@ -55,8 +55,10 @@ for i in cities:
     
 
 # connecting rooms to puzzles #
-Room.connectRooms(pdx, "forward", p1, "backward")
-Room.connectRooms(p1, "forward", p2, "backward")
+library=Room(pdx, "Reed College Library")
+eliot=Room(pdx, "Eliot Hall")
+Room.connectRooms(pdx, "forward", library, "backward")
+Room.connectRooms(library, "forward", eliot, "backward")
 Room.connectRooms(p2, "forward", p3, "backward")
 Room.connectRooms(p3, "forward", pdx, "backward")
 Room.connectRooms(sol, "forward", s1, "backward")

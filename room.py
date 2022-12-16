@@ -147,14 +147,13 @@ class Puzzle(Room):
             elif actualchoice == self.correctanswer:
                 print()
                 print("You say what you think is the correct answer, and.... \n The door opens! That was the correct answer, and you are now able to proceed.")
-                self.barrierPassed()
+                self.level+=1
                 quizingplayer = False
             else:
                 print()
                 print("You say what you think is the correct answer, and.... \n Nothing. Not a sound.")
                 print("The room you're in rumbles, and rubble falls on your head. You take 5 damage!")
                 player.health -=5
-                player.checkifdead()
                 input("Press enter to continue...")
                 quizingplayer = False
 
