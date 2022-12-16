@@ -159,7 +159,7 @@ def showHelp():
     print("\n")
     print("Getting low on health?")
     print("There are various food-like items in the game - type the eat command and see what happens!")
-    print("Low on intelligence?")
+    print("Getting low on intelligence?")
     print("Read a book. Come on, what did you expect?")
     input("Press enter to continue...")
     print("\n")
@@ -352,6 +352,11 @@ playername = input("What is your alias? ")
 
 while playername == "" or playername == " " or playername.lower() == "Cicada":
     playername = input("Smart. It's good to be private about these things. Unfortunately we need an answer: ")
+
+jimcheck=playername
+jimcheck.lower()
+if "jim" in jimcheck:
+    print ("hi jim I hope u like our final :)")
 for x in range (0,5):  
     b = "Processing" + "." * x
     print (b, end="\r")
@@ -452,7 +457,7 @@ while playing and player.alive:
             timePasses = True
 
         # pickup
-        elif commandWords[0].lower() == "pickup":  # can handle multi-word objects
+        elif commandWords[0].lower() == "pick" or commandWords[0].lower() =="pickup":  # can handle multi-word objects
             targetName = command[7:]
             target = player.location.getItemByName(targetName)
             if target != False:
@@ -491,9 +496,9 @@ while playing and player.alive:
         # inspect 
         elif commandWords[0].lower() == "inspect":
             targetName = command[8:]
-            description = player.inspectThing(targetName)
+            description = targetName.desc
             if description:
-                description(targetName)
+                print (description)
             elif description == False:
                 print("The item you seek does not exist.")
                 commandSuccess = False

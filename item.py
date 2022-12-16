@@ -20,6 +20,7 @@ class Item:
     def putInRoom(self, room):
         self.loc = room
         room.addItem(self)
+    
 
 "Perform the command of read on these items to increase your intelligence."
 class Books(Item):
