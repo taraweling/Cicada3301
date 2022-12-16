@@ -34,7 +34,7 @@ class Player:
     def goDirection(self, direction):
 
         if self.location.getDestination(direction) == None:
-            print("ERROR 404 you have not unlocked this location yet")
+            print("ERROR 404 you have not unlocked this location yet ... keep searching for clues!")
             input("Press enter to go back...")
             return
             
