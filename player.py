@@ -129,14 +129,9 @@ class Player:
         print()
         input("Press enter to continue...")
 
+    def useItem(self,item):
+        item.use()    
+
+
 
         # you can define some other functions about monster attacking etc, espcially one that allows you to make choices in fights
-
-        """
-            def examineItem(self,item?)
-            
-            def useItem(self,)
-        """
-
-
-# create a class for powers or magic and such?

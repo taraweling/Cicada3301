@@ -110,16 +110,54 @@ class Room:
         pass
 
 class Puzzle(Room):
-    def __init__ (self, description):
-        self.desc = description
-        self.monsters = []
-        self.exits = []
-        self.items = []
-        self.containers = []
-        self.characters = []
-        self.barrier = []
-        self.exits = []
-        self.solved=False
+    def __init__(self, name, desc, room1, room2, prompt, resp1, resp2, resp3, resp4, correctanswer):
+        self.name = name
+        self.desc = desc
+        self.room1 = room1
+        self.room2 = room2
+        self.hasbeenpassed = False
+        self.room1.barriers.append(self)
+        self.room2.barriers.append(self)
+
+        placeholderconvo1 = []
+        placeholderconvo2 = [prompt]
+        placeholderconvo1.extend(["1. " + resp1, "2. " + resp2, "3. " + resp3, "4. " + resp4])
+        placeholderconvo2.append(placeholderconvo1)
+        self.question = placeholderconvo2
+        self.correctanswer = correctanswer
+
+    def askQuestion(self, player):
+        quizingplayer = True
+        while quizingplayer:
+            print(self.question[0])
+            print("\n".join(map(str, self.question[1])))
+            choice = input("What is your answer? [1-4. Press 5 to escape] ")
+            while choice.isnumeric() == False:
+                print(self.question[0])
+                print("\n".join(map(str, self.question[1])))
+                choice = input("What is your answer? [1-4. Press 5 to escape] ")
+            while int(choice) <1 or int(choice) >5:
+                print(self.question[0])
+                print("\n".join(map(str, self.question[1])))
+                choice = input("What is your answer? [1-4. Press 5 to escape] ")
+            actualchoice = int(choice) -1
+            if actualchoice == 4:
+                quizingplayer = False
+                return
+            elif actualchoice == self.correctanswer:
+                print()
+                print("You say what you think is the correct answer, and.... \n The door opens! That was the correct answer, and you are now able to proceed.")
+                self.barrierPassed()
+                quizingplayer = False
+            else:
+                print()
+                print("You say what you think is the correct answer, and.... \n Nothing. Not a sound.")
+                print("The room you're in rumbles, and rubble falls on your head. You take 5 damage!")
+                player.health -=5
+                player.checkifdead()
+                input("Press enter to continue...")
+                quizingplayer = False
+
  
 
 #Class for Barrier preventing entry into other rooms before puzzle has been correctly answered 

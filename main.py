@@ -74,8 +74,7 @@ Room.connectRooms(s2, "forward", s3, "backward")
     ###
 
 # creating items #
-i = Item("Guide to Cicada 3301", "This is a copy of the game's instructions.", 0)
-i.putInRoom(pdx)
+
 i = Books("Booky book", "Just a book", 1, Player)
 
 
@@ -420,6 +419,8 @@ time.sleep(0.75)
 
 """ creating the world """
 player = Player(playername)
+i = Item(player,"Guide to Cicada 3301", "This is a copy of the game's instructions.", 3)
+i.putInRoom(pdx)
 
 # GAME STARTS HERE
 
@@ -440,9 +441,9 @@ while playing and player.alive:
     while not commandSuccess:
         commandSuccess = True
         needsHelp=False
-        command = input("What now? ")
+        command = input("What do you want to do now? ")
         while command == " " or command == "":
-            command = input("What now? ")
+            command = input("What do you want to do now? ")
         commandWords = command.split()
             
         # add other commands! 
