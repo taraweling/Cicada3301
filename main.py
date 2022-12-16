@@ -3,7 +3,7 @@ from room import Room
 #from room import Barrier, quizBarrier
 from player import Player
 from item import * # other item classes as well
-from monster import Monster
+from monster import *
 from NPC import NPC #, Cicada
 import os
 import updater
@@ -65,22 +65,15 @@ Room.connectRooms(sol, "forward", s1, "backward")
 Room.connectRooms(s1, "forward", s2, "backward")
 Room.connectRooms(s2, "forward", s3, "backward")
 
-    #Room.connectRooms(p1, "")
 
-    ## seoul 
-    # Room.connectRooms(p1, " ", p2, " ")
-    #Room.connectRooms(ekv, "east", hal, "west")
-    #Room.connectRooms(sol, "north", r3, "south")
-    #Room.connectRooms(r2, "north", r4, "south")
-
-    ###
 
 # creating items #
 
+i = Books("Liber Primus", "Cicada 3301's very own manifesto, filled with mysterious pages of rune script interspersed with latin.", 2, Player)
 i = Books("Booky book", "Just a book", 1, Player)
 
 
-# creating monsters #
+# creating monsters 
 #Monster("Bob the monster", pdx)
 
 ###
@@ -199,13 +192,7 @@ def showHelp():
     input("Press enter to continue...")
     print("\n")
 
-
-
 # # # # # # # # # # # #
-
-
-
-
 
 ### intro scene ###
 # add music
