@@ -439,6 +439,7 @@ print("and I will find out.")
 time.sleep(1)
 
 eye()
+cicada()
 
 time.sleep(0.75)
 
