@@ -38,9 +38,9 @@ class Player:
             input("Press enter to go back...")
             return
             
-        if self.location.barrier != [] and self.location.getDestination(direction).barrier != []:
-            if self.location.barrier[0].type == "Puzzle":
-                self.location.barrier[0].ask(self)
+        if self.location.barriers != [] and self.location.getDestination(direction).barriers != []:
+            if self.location.barriers[0].type == "Puzzle":
+                self.location.barriers[0].ask(self)
                 pass
             else:
                 print("Forbidden")

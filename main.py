@@ -80,7 +80,7 @@ i = Books("Booky book", "Just a book", 1, Player)
 
 
 # creating monsters #
-Monster("Bob the monster", pdx)
+#Monster("Bob the monster", pdx)
 
 ###
 
@@ -524,9 +524,13 @@ while playing and player.alive:
         #        commandSuccess = False
 
         # fly to
-        #if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
-        #    targetName = command
-        # invalid command
+        if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
+            if commandWords[0].lower() == "fly to":
+                x = 8
+            else:
+                x=4
+            player.goDirection(commandWords[1].lower()) 
+            timePasses = True
         
         else:
             if not player.needsHelp:
