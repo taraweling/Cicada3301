@@ -103,7 +103,11 @@ def recover():
             intelligence = int(float(f.readline().strip()))
             level = int(f.readline().strip())
 
-        player = Player(location, health, intelligence, level)
+        player = Player(playername)
+        player.location=location
+        player.health=health
+        player.intelligence=intelligence
+        player.level=level
     else:
     # Create a new player object as before
         player = Player(pdx, 10, 5, 1)
