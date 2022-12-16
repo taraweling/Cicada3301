@@ -30,6 +30,7 @@ but we have written the following parts:
 -inspect command
 -limited inventory
 -drop command
+-other commands (eat, use, pickup)
 -healing item
 -regeneration
 -victory condition
@@ -39,3 +40,5 @@ but we have written the following parts:
 -world modification (maybe?)
 -game saving
 -ASCII art
+-help command
+-live typing
