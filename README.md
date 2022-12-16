@@ -23,8 +23,24 @@ informatics events of the 10's, our game
 immerses you in a world of cyphers, 
 monsters, and mysteries as well. 
 
-Our game is not everything we envisioned, 
-but we have written the following parts:
+themes: cryptography, logic, linguistics, 
+data security, warped reality, breaking the fourth wall 
+
+our implementation of the Cicada mystery 
+is a text-based adventure game where the 
+player works through puzzles increasing 
+in complexity and difficulty. the player 
+interacts with the game world (and 
+sometimes the real world) to progress 
+through the series of events that may 
+eventually lead you to the identity of 
+cicada 3301.
+
+–––––––––––––––––––––––––––––––––––––––––
+
+Our game is not yet everything we 
+envisioned, but we haveve written the 
+following parts:
 
 -me command
 -inspect command
