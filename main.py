@@ -104,38 +104,44 @@ def printSituation(player):
     print("\n")
     # monsters
     if player.location.hasMonsters():
-        print("This room contains the following monster(s):")
+        print("This room contains the following monster(s): \n")
         for m in player.location.monsters:
             time.sleep(0.5)
             print(m.name)
+        print("\n")
     
     # items
     if player.location.hasItems():
-        print("This room contains the following items:")
+        print("This room contains the following items: \n")
         for i in player.location.items:
             time.sleep(0.5)
             print(i.name)
+        print("\n")
     else:
         print("This room contains no items...")
+        print("\n")
         
     # characters
     if player.location.hasCharacters():
-        print("This room contains the following characters:")
+        print("This room contains the following characters: \n")
         for i in player.location.characters:
             time.sleep(0.5)
             print(i.name)
+        print("\n")
 
     # barriers
     if player.location.hasBarriers():
-        print("This room contains the following obstacles:")
+        print("This room contains the following obstacles: \n")
         for i in player.location.barriers:
             time.sleep(0.5)
             print(i.name) 
+        print("\n")
 
     #this is currently faulty - change it to be more clean
-    print("You can go in the following directions:")
+    print("You can go in the following directions: \n")
     for exit in player.location.exitNames():
         print(exit)
+    print("\n")
     # anything extra
 
 
