@@ -100,7 +100,7 @@ def recover():
         with open(filename, "r") as f:
             location = f.readline().strip()
             health = int(f.readline().strip())
-            intelligence = int(f.readline().strip())
+            intelligence = int(float(f.readline().strip()))
             level = int(f.readline().strip())
 
         player = Player(location, health, intelligence, level)
