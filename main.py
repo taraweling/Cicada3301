@@ -605,4 +605,4 @@ while playing and player.alive:
             
     if timePasses == True:
         updater.updateAll()
-        player.health+=.2
+        player.health+=(1/5)
