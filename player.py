@@ -39,9 +39,14 @@ class Player:
             return
             
         if self.location.barriers != [] and self.location.getDestination(direction).barriers != []:
-            if self.location.barriers[0].type == "Puzzle":
-                self.location.barriers[0].ask(self)
-                pass
+            if self.location.barrier[0].type == "Barrier" and self.location.barrier[0].open:
+                self.location = self.location.barrier
+                if self.location not in self.unlocked:
+                    print ("Congratulations on completing this level. You are one step closer to discovering Cicada's secret")
+                    self.level+=1
+                    self.unlocked.append(self.location)
+
+                print ("You have entered "+ str(self.location.desc+ "."))
             else:
                 print("Forbidden")
                 input("Press enter to go back...")

@@ -523,6 +523,19 @@ while playing and player.alive:
         #        commandSuccess = False
 
         # fly to
+        if player.level > 5:
+            clear()
+            print("Congratulations. You have successfully unmasked Cicada. The world of cryptography and computation has been forever changed.")
+            time.sleep(5)
+            print ("Dei spectant.")
+            time.sleep(2)
+            clear()
+            print ("Dei spectant.")
+            time.sleep(3)
+            clear()
+            time.sleep(1)
+            quit()
+        
         if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
             if commandWords[0].lower() == "fly to":
                 x = 8
