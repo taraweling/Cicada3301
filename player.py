@@ -58,7 +58,7 @@ class Player:
 
     def pickup(self, item):
         
-        if self.itemweights +item.weight < 20
+        if self.itemweights +item.weight < 20:
             self.items.append(item)
             self.itemWeights += item.weight
             item.loc = self
