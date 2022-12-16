@@ -74,7 +74,7 @@ Room.connectRooms(s2, "forward", s3, "backward")
     ###
 
 # creating items #
-i = Item("Your guide to Cicada 3301!", "This is just a copy of the game's instructions.", 0)
+i = Item("Guide to Cicada 3301", "This is a copy of the game's instructions.", 0)
 i.putInRoom(pdx)
 i = Books("Booky book", "Just a book", 1, Player)
 
@@ -352,8 +352,13 @@ playername = input("What is your alias? ")
 
 while playername == "" or playername == " " or playername.lower() == "Cicada":
     playername = input("Smart. It's good to be private about these things. Unfortunately we need an answer: ")
-time.sleep(0.75)
+for x in range (0,5):  
+    b = "Processing" + "." * x
+    print (b, end="\r")
+    time.sleep(0.25)
 print(playername + " has been successfully added to player database.") 
+time.sleep(1)
+input("You may now enter")
 
 # Function for inserting the player name the eye
 def formatName(playername, length):

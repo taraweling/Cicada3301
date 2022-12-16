@@ -9,7 +9,7 @@ class Room:
         self.items = []
         self.containers = []
         self.characters = []
-        self.barrier = []
+        self.barriers = []
         self.exits = []
 
     # Exits
