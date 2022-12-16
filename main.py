@@ -208,7 +208,6 @@ def showHelp():
 # print cicada intro
 
 # Some cool ASCII printing functions
-"""
 def eye():
     print(".           ..         .           .       .           .           .")
     time.sleep(0.2)
@@ -298,7 +297,7 @@ def cicada():
     print("                                              Y&~                                                   ")
     time.sleep(0.15)
     print("                                               ^&7                                                  ")
-"""
+
 # cleared for speed
 clear()
 #cicada()
@@ -312,7 +311,7 @@ def endings():
 
 # # # # # # # # # # # # # remember to remove commented out paragraphs
 
-"""
+
 # cicada 3301 screen
 
 clear()
@@ -336,7 +335,7 @@ print("\n")
 print("3301")
 print()
 input("Press enter to accept challenge...")
-"""
+
 
 intro = False
 while intro:
@@ -414,7 +413,7 @@ def formatName(playername, length):
 # do something cool with the players name
 # add music
 # commented out for speed
-"""
+
 print("\n")
 time.sleep(1)
 print("Remember")
@@ -438,9 +437,9 @@ time.sleep(1)
 eye()
 
 time.sleep(0.75)
-"""
 
-#input("Press enter to continue...")
+
+input("Press enter to continue...")
 
 
 
