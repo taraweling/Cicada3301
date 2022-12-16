@@ -39,8 +39,8 @@ cicada 3301.
 –––––––––––––––––––––––––––––––––––––––––
 
 Our game is not yet everything we 
-envisioned, but we haveve written the 
-following parts:
+envisioned; We have written the following 
+parts:
 
 -me command
 -inspect command
