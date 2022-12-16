@@ -89,7 +89,7 @@ class Player:
         print("Your current status:\n")
         print(str(self.name))
         #+ ", Level: " + str(self.level))
-        print("Intelligence:\t" + str(self.intelligence) + "/" + str(self.maxIntelligence))
+        print("Intelligence:\t" + str(self.intelligence) + "/" + str(self.maxintelligence))
         print()
         if self.intelligence <= 10:
             print("Cicada only wants to best and brightest. You can only level up ")

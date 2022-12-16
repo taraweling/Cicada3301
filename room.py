@@ -1,8 +1,9 @@
 import random
 
 class Room:
-    def __init__(self, description):
+    def __init__(self, location, description):
         self.desc = description
+        self.location = location
         self.monsters = []
         self.exits = []
         self.items = []
@@ -107,8 +108,19 @@ class Room:
     
     def update(self):
         pass
-    
 
+class Puzzle(Room):
+    def __init__ (self, description):
+        self.desc = description
+        self.monsters = []
+        self.exits = []
+        self.items = []
+        self.containers = []
+        self.characters = []
+        self.barrier = []
+        self.exits = []
+        self.solved=False
+ 
 
 #Class for Barrier preventing entry into other rooms before puzzle has been correctly answered 
 

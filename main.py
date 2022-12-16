@@ -49,8 +49,8 @@ cities = [pdx, sol, war, hal]
 for i in cities:
     for k in cities:
         if len(k.exits)==0:
-            flyout = "fly to " + str(k.name)
-            flyback = "fly back " + str(i.name)
+            flyout = "fly to " + str(k.location)
+            flyback = "fly back " + str(i.location)
             Room.connectRooms(i, flyout, k, flyback)
     
 
@@ -93,7 +93,7 @@ def printSituation(player):
     
     clear()
 
-    print(player.showStatus)
+    player.showStatus()
     print(player.location.desc)
     time.sleep(0.2)
     print("\n")
@@ -348,10 +348,10 @@ while intro:
         print("You either understand or you don't.")
 print("\n")
 time.sleep(1)
-playername = input("What is your digital alias? ")
+playername = input("What is your alias? ")
 
 while playername == "" or playername == " " or playername.lower() == "Cicada":
-    playername = input("Invalid. Try again. ")
+    playername = input("Smart. It's good to be private about these things. Unfortunately we need an answer: ")
 time.sleep(0.75)
 print(playername + " has been successfully added to player database.") 
 
