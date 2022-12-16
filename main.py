@@ -157,7 +157,7 @@ def showHelp():
     # have these been coded yet?
     print("talk to <NPC> -- talks to an NPC")
     print("\n")
-    print("Getting low on Health?")
+    print("Getting low on health?")
     print("There are various food-like items in the game - type the eat command and see what happens!")
     print("Low on intelligence?")
     print("Read a book. Come on, what did you expect?")
@@ -429,6 +429,7 @@ while playing and player.alive:
 
     while not commandSuccess:
         commandSuccess = True
+        needsHelp=False
         command = input("What now? ")
         while command == " " or command == "":
             command = input("What now? ")
@@ -521,9 +522,14 @@ while playing and player.alive:
         #if commandWords[0].lower() == "fly to" or commandWords[0].lower() == "fly":
         #    targetName = command
         # invalid command
-
+        
         else:
-            print("Not a valid command.")
+            if not player.needsHelp:
+                print("Not a valid command.")
+                player.needsHelp=True
+            else:
+                print("Not a valid command. You may always ask for help.")
+                player.needsHelp=False
             commandSuccess = False
             
     if timePasses == True:

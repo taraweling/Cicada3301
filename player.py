@@ -23,6 +23,7 @@ class Player:
         self.pointstillnextlevel = 1
         self.alive = True
         self.itemWeights = 0 # make inventory have a limit
+        self.needsHelp=False
     
     # list of actions: levelUp, goDirection, pickup, drop, getItemName, showInventory, showStatus, removeItem, attackMonster
 
