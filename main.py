@@ -16,7 +16,7 @@ beatCicada = False
 # creating rooms (aka cities) - and subrooms (aka puzzles) #
 
 # home city = pdx
-pdx = Room("Home", "Portland, OR: where you live on Reed College campus.")
+pdx = Room("Home", "Portland, OR, where you live on Reed College campus.")
 p1 = Room("Puzzle 1", "blah")
 p2 = Room("Puzzle 2", "bleh")
 p3 = Room("Puzzle 3", "bloh") 
@@ -93,8 +93,8 @@ def printSituation(player):
     
     clear()
 
-    player.showStatus()
-    print(player.location.desc)
+    #player.showStatus              #redundant with below
+    #print(player.location.desc)    #
     time.sleep(0.2)
     print("\n")
     print("Your intelligence: " + str(player.intelligence))
@@ -399,7 +399,7 @@ eye()
 time.sleep(0.75)
 """
 
-input("Press enter to continue...")
+#input("Press enter to continue...")
 
 
 
