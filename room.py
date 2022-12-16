@@ -25,7 +25,7 @@ class Room:
         for e in self.exits:
             if e[0] == direction:
                 return e[1]
-        return False #return None
+        return None
 
     # Connections
     def connectRooms(room1, dir1, room2, dir2):

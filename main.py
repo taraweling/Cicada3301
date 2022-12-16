@@ -48,7 +48,7 @@ h2 = Room("Puzzle 10", "blaaksns")
 cities = [pdx, sol, war, hal]
 for i in cities:
     for k in cities:
-        if len(k.exits)==0:
+        if len(k.exits)==0 and k!=i:
             flyout = "fly to " + str(k.location)
             flyback = "fly back " + str(i.location)
             Room.connectRooms(i, flyout, k, flyback)
@@ -354,8 +354,7 @@ while playername == "" or playername == " " or playername.lower() == "Cicada":
     playername = input("Smart. It's good to be private about these things. Unfortunately we need an answer: ")
 
 jimcheck=playername
-jimcheck.lower()
-if "jim" in jimcheck:
+if "jim" in jimcheck.lower():
     print ("hi jim I hope u like our final :)")
 for x in range (0,5):  
     b = "Processing" + "." * x
